@@ -4,6 +4,7 @@ from pprint import pprint
 from pymongo import MongoClient
 from datetime import date
 import calendar
+import pandas as pd
 
 weather = []
 year = 2014
@@ -38,3 +39,6 @@ for collection_name in db.list_collection_names():
         collection.drop()
 
 result = db.weather.insert_many(weather)
+
+df = pd.DataFrame(weather)
+df.to_csv("weather.csv", sep=",", index=False)
